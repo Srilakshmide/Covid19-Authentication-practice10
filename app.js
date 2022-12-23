@@ -46,7 +46,7 @@ app.post("/login/", async (request, response) => {
     );
     if (isPasswordMatch === true) {
       const payload = { username: username };
-      const jwtToken = jwt.sing(payload, "sri_secret_key");
+      const jwtToken = jwt.sign(payload, "sri_secret_key");
       response.send({ jwtToken });
     } else {
       response.status(400);
@@ -59,7 +59,7 @@ app.post("/login/", async (request, response) => {
 });
 
 //Authentication Token
-const authenticateToken = (request, response, next) => {
+function authenticateToken(request, response, next){
   let jwtToken;
   const authHeader = request.headers["authorization"];
   if (authHeader !== undefined) {
